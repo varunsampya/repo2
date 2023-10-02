@@ -35,10 +35,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Get Tenant Name from Workflow Environment Variable
         env: 
           tenant_name: ${{ needs.print-current-time.outputs.tenant_name }}
+
+          
+      # - name: Get Tenant Name from Workflow Environment Variable
+      #   env: 
+      #     tenant_name: ${{ needs.print-current-time.outputs.tenant_name }}
 
 
       - name: Create Bundle
