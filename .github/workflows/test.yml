@@ -1,0 +1,45 @@
+name: Print Workflow Environment Variable with Current Time
+on:
+  workflow_dispatch:
+    inputs:
+      tenant:
+        type: choice
+        required: true
+        description: 'The tenant to update'
+        options:
+        - 'tenantA'
+
+jobs:
+  print-current-time:
+    name: PrintCurrentTime
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Print Current Time
+        run: |
+          echo "The current time for tenant ${{ inputs.tenant }} is: $(date)"
+
+      - name: Set Workflow Environment Variable
+        run: |
+          echo "${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)" > tenant_name
+
+  create-bundle:
+    name: CreateBundle
+    needs: print-current-time
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Get Tenant Name from Workflow Environment Variable
+        run: |
+          tenant_name=$(cat tenant_name)
+          echo "The tenant name is: $tenant_name"
+
+      - name: Create Bundle
+        run: |
+          python ./create.py $tenant_name
