@@ -38,7 +38,7 @@ jobs:
         env: 
           tenant_name: ${{ needs.print-current-time.outputs.env_name }}
       - name: Print Tenant Name
-        run:  echo "$tenant_name"
+        run:  echo echo "${{ needs.print-current-time.outputs.env_name }}"
 
           
       # - name: Get Tenant Name from Workflow Environment Variable
