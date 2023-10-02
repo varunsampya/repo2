@@ -26,11 +26,12 @@ jobs:
         run: |
           echo "${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)" > tenant_name
 
+      - name: Get Tenant Name from Workflow Environment Variable
+        run: |
+          echo ${{ steps.set_workflow_environment_variable.outputs.tenant_name }} > tenant_name
+
   create-bundle:
     name: CreateBundle
-    needs: 
-      run-after: 
-       print-current-time
     runs-on: ubuntu-latest
 
     steps:
