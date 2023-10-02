@@ -39,11 +39,11 @@ jobs:
           tenant_name: ${{ needs.print-current-time.outputs.tenant_name }}
 
           
-      # - name: Get Tenant Name from Workflow Environment Variable
-      #   env: 
-      #     tenant_name: ${{ needs.print-current-time.outputs.tenant_name }}
-
-
-      - name: Create Bundle
+      - name: print env
         run: |
-          python ./create.py $tenant_name
+          echo $tenant_name
+
+
+      # - name: Create Bundle
+      #   run: |
+      #     python ./create.py $tenant_name
