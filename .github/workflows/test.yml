@@ -13,7 +13,8 @@ jobs:
   print-current-time:
     name: PrintCurrentTime
     runs-on: ubuntu-latest
-
+    outputs:
+      tenant_name: ${{ steps.set-workflow-environment-variable.outputs.tenant_name }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -26,12 +27,9 @@ jobs:
         run: |
           echo "${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)" > tenant_name
 
-      - name: Get Tenant Name from Workflow Environment Variable
-        run: |
-          echo ${{ steps.set_workflow_environment_variable.outputs.tenant_name }} > tenant_name
-
   create-bundle:
     name: CreateBundle
+    needs: print-current-time
     runs-on: ubuntu-latest
 
     steps:
@@ -39,10 +37,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Get Tenant Name from Workflow Environment Variable
-        run: |
-          tenant_name=$(cat tenant_name)
-          echo "The tenant name is: $tenant_name"
+        env: 
+          tenant_name: ${{ needs.print-current-time.outputs.tenant_name }}
+
 
       - name: Create Bundle
         run: |
-          python ./create.py ${{ inputs.tenant }} $tenant_name
+          python ./create.py $tenant_name
