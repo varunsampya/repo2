@@ -3,6 +3,6 @@ import os
 import env
 
 name = sys.argv[1]
-bundle name = sys.argv[2]
+bundle_name = sys.argv[2]
 print("name")
 print("bundle_name")
