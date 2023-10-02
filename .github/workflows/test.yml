@@ -41,4 +41,4 @@ jobs:
 
       - name: Create Bundle
         run: |
-          python ./create.py $tenant_name "${{ needs.print-current-time.outputs.env_name }}"
+          python ./create.py "${{ inputs.tenant }}" "${{ needs.print-current-time.outputs.env_name }}"
