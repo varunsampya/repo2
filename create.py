@@ -1,1 +1,8 @@
-print("Hello")
+import sys
+import os
+import env
+
+name = sys.argv[1]
+bundle name = sys.argv[2]
+print("name")
+print("bundle_name")
