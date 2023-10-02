@@ -25,7 +25,7 @@ jobs:
 
       - id: set_name
         run: |
-          echo "name=${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)" > $GITHUB_ENV
+          echo "name=${{ inputs.tenant }}_$(date +%Y%m%d%H%M%S)" > "$GITHUB_OUTPUT"
 
   create-bundle:
     name: CreateBundle
