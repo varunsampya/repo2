@@ -28,7 +28,9 @@ jobs:
 
   create-bundle:
     name: CreateBundle
-    needs: print-current-time
+    needs: 
+      run-after: 
+       print-current-time
     runs-on: ubuntu-latest
 
     steps:
