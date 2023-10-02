@@ -42,4 +42,4 @@ jobs:
 
       - name: Create Bundle
         run: |
-          python ./create.py $tenant_name
+          python ./create.py ${{ inputs.tenant }} $tenant_name
