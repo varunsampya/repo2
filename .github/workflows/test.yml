@@ -35,12 +35,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        # env: 
-        #   tenant_name: ${{ needs.print-current-time.outputs.env_name }}
       - name: Print Tenant Name
         run: echo "${{ needs.print-current-time.outputs.env_name }}"
 
 
-      # - name: Create Bundle
-      #   run: |
-      #     python ./create.py $tenant_name
+      - name: Create Bundle
+        run: |
+          python ./create.py $tenant_name "${{ needs.print-current-time.outputs.env_name }}"
